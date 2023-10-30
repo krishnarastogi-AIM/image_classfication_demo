@@ -1,0 +1,4 @@
+torch
+torchvision
+neptune-client
+python-dotenv

@@ -1,0 +1,20 @@
+# Use an official PyTorch CPU image as a parent image
+FROM pytorch/pytorch:latest
+
+# Set the maintainer label
+LABEL maintainer="krishna.rastogi@machinehack.com"
+
+# Set the working directory in Docker
+WORKDIR /app
+
+# Copy the requirements file into the container at /app
+COPY requirements_train.txt /app/
+
+# Install any dependencies
+RUN pip install --no-cache-dir -r requirements_train.txt
+
+# Copy the content of the local src directory to the working directory
+COPY src/ /app/src/
+
+# Specify the command to run on container start
+CMD ["python", "/app/src/models/train_model.py"]

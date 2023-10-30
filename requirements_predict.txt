@@ -1,0 +1,6 @@
+torch
+torchvision
+neptune-client
+python-dotenv
+Pillow
+argparse
