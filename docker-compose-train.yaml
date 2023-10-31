@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  model_training:
+    build:
+      context: .
+      dockerfile: Dockerfile.train
+    volumes:
+      - ./data:/app/data
+      - ./models:/app/models
+    environment:
+      - TRAINING_DATA_PATH=/app/data/training_data.csv
+      - MODEL_OUTPUT_PATH=/app/models/output_model.pth

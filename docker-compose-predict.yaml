@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  model_prediction:
+    build:
+      context: .
+      dockerfile: Dockerfile.predict
+    volumes:
+      - ./data:/app/data
+      - ./models:/app/models
+    environment:
+      - MODEL_PATH=/app/models/trained_model.pth
+      - INPUT_DATA_PATH=/app/data/input_data.csv
+      - OUTPUT_DATA_PATH=/app/data/output_data.csv
