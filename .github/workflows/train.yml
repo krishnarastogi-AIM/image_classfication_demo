@@ -1,0 +1,23 @@
+name: Docker Build
+
+on:
+  push:
+    branches:
+      - development
+  pull_request:
+    branches:
+      - development
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Build Docker image
+      run: docker build -f Dockerfile.train -t my-python-app .
+
+    - name: Run Docker image (optional)
+      run: docker run my-python-app
