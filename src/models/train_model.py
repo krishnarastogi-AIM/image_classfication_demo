@@ -6,16 +6,16 @@ import os
 import torch
 import torch.nn.functional as F
 from simple_cnn import SimpleCNN
-import neptune
+# import neptune
 from dotenv import load_dotenv
 
 # Load environment variables from .env
 # load_dotenv()
 
-run = neptune.init_run(
-    project="krishna.rastogi/imageclassificationcifar10",
-    api_token="eyJhcGlfYWRkcmVzcyI6Imh0dHBzOi8vYXBwLm5lcHR1bmUuYWkiLCJhcGlfdXJsIjoiaHR0cHM6Ly9hcHAubmVwdHVuZS5haSIsImFwaV9rZXkiOiIxMzViNzZjYi1lYzg0LTQwMjMtOWRhNi02ZDljYWQ1MjJmMDEifQ==",
-)  # your credentials
+# run = neptune.init_run(
+#     project="krishna.rastogi/imageclassificationcifar10",
+#     api_token="eyJhcGlfYWRkcmVzcyI6Imh0dHBzOi8vYXBwLm5lcHR1bmUuYWkiLCJhcGlfdXJsIjoiaHR0cHM6Ly9hcHAubmVwdHVuZS5haSIsImFwaV9rZXkiOiIxMzViNzZjYi1lYzg0LTQwMjMtOWRhNi02ZDljYWQ1MjJmMDEifQ==",
+# )  # your credentials
 
 # Load datasets
 transform = transforms.Compose([
@@ -36,7 +36,7 @@ optimizer = optim.Adam(model.parameters(), lr=0.001)
 criterion = nn.CrossEntropyLoss()
 
 # Training loop
-num_epochs = 10
+num_epochs = 2
 for epoch in range(num_epochs):
     model.train()
     for batch_idx, (data, target) in enumerate(train_loader):
@@ -48,8 +48,8 @@ for epoch in range(num_epochs):
         optimizer.step()
         
         # Log metrics to Neptune
-        if batch_idx % 100 == 0:
-            neptune.log_metric('training_loss', loss.item())
+        # if batch_idx % 100 == 0:
+        #     neptune.log_metric('training_loss', loss.item())
 
     # Validation loop and metrics logging
     model.eval()
@@ -66,10 +66,10 @@ for epoch in range(num_epochs):
     val_loss /= len(val_loader.dataset)
     val_accuracy = 100. * correct / len(val_loader.dataset)
     
-    neptune.log_metric('validation_loss', val_loss)
-    neptune.log_metric('validation_accuracy', val_accuracy)
+    # neptune.log_metric('validation_loss', val_loss)
+    # neptune.log_metric('validation_accuracy', val_accuracy)
 
 # Save the trained model
-torch.save(model.state_dict(), '../../models/cifar10_simple_cnn.pth')
-neptune.log_artifact('model.pt', model.state_dict())
-neptune.stop()
+torch.save(model.state_dict(), '/Users/sourabhmehta/illustrations/git_repo_exl/image_classfication_demo/models/cifar10_simple_cnn.pth')
+# neptune.log_artifact('model.pt', model.state_dict())
+# neptune.stop()
