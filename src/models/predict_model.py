@@ -20,7 +20,7 @@ from dotenv import load_dotenv
 # Load the trained model
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 model = SimpleCNN().to(device)
-model.load_state_dict(torch.load('/Users/sourabhmehta/illustrations/git_repo_exl/image_classfication_demo/models/cifar10_simple_cnn.pth'))
+model.load_state_dict(torch.load('/Users/sourabhmehta/illustrations/git_repo_exl_1/image_classfication_demo/models/cifar10_simple_cnn.pth'))
 model.eval()
 
 # Define the transformation
@@ -30,8 +30,8 @@ transform = transforms.Compose([
     transforms.Normalize(mean=[0.5, 0.5, 0.5], std=[0.5, 0.5, 0.5]),
 ])
 
-app = Flask(__name__)#template_folder='src/templates'
-
+app = Flask(__name__,template_folder='src/templates')
+app.template_folder = '/Users/sourabhmehta/illustrations/git_repo_exl_1/image_classfication_demo/src/templates'
 @app.route('/', methods=['GET', 'POST'])
 def classify_image():
     if request.method == 'POST':
@@ -54,7 +54,7 @@ def classify_image():
             # Display the result
             result = f"Predicted class: {datasets.CIFAR10.classes[prediction]}, Confidence: {confidence:.4f}"
             return result
-    return render_template('/Users/sourabhmehta/illustrations/git_repo_exl/image_classfication_demo/src/templates/index.html')
+    return render_template('index.html')
 
 def predict(image_path):
     image = Image.open(image_path)
