@@ -30,6 +30,10 @@ transform = transforms.Compose([
     transforms.Normalize(mean=[0.5, 0.5, 0.5], std=[0.5, 0.5, 0.5]),
 ])
 
+cifar10_classes = [
+    'airplane', 'automobile', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck'
+]
+
 app = Flask(__name__,template_folder='src/templates')
 app.template_folder = '/Users/sourabhmehta/illustrations/git_repo_exl_1/image_classfication_demo/src/templates'
 @app.route('/', methods=['GET', 'POST'])
@@ -52,7 +56,7 @@ def classify_image():
             prediction, confidence = predict(img_path)
 
             # Display the result
-            result = f"Predicted class: {datasets.CIFAR10.classes[prediction]}, Confidence: {confidence:.4f}"
+            result = f"Predicted class: {cifar10_classes[prediction]}, Confidence: {confidence:.4f}"
             return result
     return render_template('index.html')
 
