@@ -2,12 +2,47 @@
 <html>
 <head>
     <title>Image Classification</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2em;
+            margin-top: 0;
+        }
+
+        form {
+            margin-top: 1em;
+        }
+
+        input[type="file"] {
+            width: 100%;
+            margin-bottom: 0.5em;
+            padding: 10px;
+            border: 2px solid #333;
+            border-radius: 5px;
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            margin-bottom: 0.5em;
+            padding: 10px;
+            background-color: #000;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
     <h1>Upload an Image for Classification</h1>
     <form method="POST" enctype="multipart/form-data">
-        <input type="file" name="image">
-        <input type="submit" value="Classify">
+        <label for="image">Choose an Image:</label>
+        <input type="file" id="image" name="image" accept="image/*">
+        <button type="submit">Classify</button>
     </form>
 </body>
 </html>
